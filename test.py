@@ -1,10 +1,13 @@
 import unittest
 
-import jira.exceptions
+import jira
 
+import Tikcet
 from Config import Config
+from Enums import Enums
 from JQLBuilder import JQLBuilder
 from JiraConnection import JiraConnection
+from JiraFacade import JiraFacade
 
 
 class Test(unittest.TestCase):
@@ -40,3 +43,29 @@ class Test(unittest.TestCase):
             JQLBuilder().set_project('shopping').get(),
             'project = shopping'
         )
+
+        self.assertEqual(
+            JQLBuilder().set_project('shopping').set_key('SHOP-123').get(),
+            'project = shopping AND key = SHOP-123'
+        )
+
+    def test_jira_search_issues(self):
+        username = Config().get('jira.username')
+        password = Config().get('jira.password')
+        connection = JiraConnection(username, password).get()
+        jql = JQLBuilder().set_project(Enums.project_shopping).get()
+        issues = connection.search_issues(jql_str=jql, maxResults=1)
+        self.assertIsInstance(issues, jira.client.ResultList)
+        issue = issues.pop()
+        self.assertIsInstance(issue, jira.Issue)
+
+    def test_jira_facade_ticket_getters(self):
+        jira = JiraFacade()
+        ticket = jira.find_ticket_by_id('SHOP-2119')
+        self.assertIsInstance(ticket, Tikcet.Ticket)
+        self.assertEqual(ticket.get_id(), 'SHOP-2119')
+        self.assertEqual(ticket.get_ticket_type(), 'Bug')
+
+        jql = JQLBuilder().set_project(Enums.project_shopping).get()
+        tickets = jira.get_tickets_from_jql(jql, 3)
+        self.assertIsInstance(tickets, list)
