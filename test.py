@@ -20,12 +20,23 @@ class Test(unittest.TestCase):
         self.assertIsNotNone(Config().get('jira.username'))
         self.assertIsNotNone(Config().get('jira.password'))
 
-    def test_jira_connection_exists(self):
+    def test_jira_connection_with_password(self):
         username = Config().get('jira.username')
         password = Config().get('jira.password')
 
         try:
             JiraConnection(username, password).get()
+        except jira.exceptions.JIRAError:
+            self.assertTrue(False)
+
+        self.assertTrue(True)
+
+    def test_jira_connection_with_personal_token(self):
+        username = Config().get('jira.username')
+        token = Config().get('jira.token')
+
+        try:
+            JiraConnection(username, token).get()
         except jira.exceptions.JIRAError:
             self.assertTrue(False)
 
@@ -60,12 +71,11 @@ class Test(unittest.TestCase):
         self.assertIsInstance(issue, jira.Issue)
 
     def test_jira_facade_ticket_getters(self):
-        jira = JiraFacade()
-        ticket = jira.find_ticket_by_id('SHOP-2119')
+        ticket = JiraFacade().find_ticket_by_key('SHOP-2119')
         self.assertIsInstance(ticket, Tikcet.Ticket)
-        self.assertEqual(ticket.get_id(), 'SHOP-2119')
-        self.assertEqual(ticket.get_ticket_type(), 'Bug')
+        self.assertEqual(ticket.get_key(), 'SHOP-2119')
+        self.assertEqual(ticket.get_type(), 'Bug')
 
         jql = JQLBuilder().set_project(Enums.project_shopping).get()
-        tickets = jira.get_tickets_from_jql(jql, 3)
+        tickets = JiraFacade().get_tickets_from_jql(jql, 3)
         self.assertIsInstance(tickets, list)
