@@ -1,10 +1,13 @@
 class Enums(object):
+    # projects
     project_shopping = 'SHOP'
 
+    # jira custom fields
     field_squad_name = 'customfield_10600'
     field_estimation = 'customfield_10521'
     field_sprint = 'customfield_10101'
 
+    # squad names
     squad_name_promotion = 'Promotions'
     squad_name_omc = 'OMC'
     squad_name_discovery = 'Discovery'
@@ -31,6 +34,7 @@ class Enums(object):
         squad_name_ds,
     ]
 
+    # statuses
     status_analysis = 'Analysis'
     status_product_backlog = '"Product Backlog"'
     status_sprint_backlog = '"Sprint Backlog"'
@@ -46,4 +50,8 @@ class Enums(object):
     status_blocked = 'Blocked'
     status_closed = 'Closed'
 
+    # labels
     label_out_of_plan = 'OutOfPlan'
+    label_front_end = 'Front-End'
+    label_back_end = 'Back-End'
+    label_design = 'Design'

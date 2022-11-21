@@ -61,6 +61,16 @@ class Ticket(object):
     def get_issue(self) -> Issue:
         return self.issue
 
+    def get_team_name(self) -> str:
+        labels = self.get_labels()
+        if Enums.label_front_end in labels:
+            return 'frontend'
+        if Enums.label_back_end in labels:
+            return 'backend'
+        if Enums.label_design in labels:
+            return 'design'
+        return ''
+
     def get_as_dict(self) -> dict:
         return {
             'key': self.get_key(),
@@ -75,6 +85,7 @@ class Ticket(object):
             'sprint': self.get_sprint(),
             'squad_name': self.get_squad_name(),
             'is_out_of_plan': self.is_out_of_plan(),
+            'team_name': self.get_team_name(),
         }
 
     # todo epic_link, priority, start_at, end_at, blocked_at,
