@@ -71,6 +71,9 @@ class Ticket(object):
             return 'design'
         return ''
 
+    def get_priority(self) -> str:
+        return self.issue.get_field('priority').name
+
     def get_as_dict(self) -> dict:
         return {
             'key': self.get_key(),
@@ -86,6 +89,7 @@ class Ticket(object):
             'squad_name': self.get_squad_name(),
             'is_out_of_plan': self.is_out_of_plan(),
             'team_name': self.get_team_name(),
+            'priority': self.get_priority(),
         }
 
-    # todo epic_link, priority, start_at, end_at, blocked_at,
+    # todo epic_link, start_at, end_at, blocked_at,
