@@ -26,18 +26,22 @@ class Ticket(object):
         return self.issue.fields.issuetype.name
 
     def get_assigned_to(self) -> str:
+        if self.issue.fields.assignee is None:
+            return ''
         return self.issue.fields.assignee.name
 
     def get_reported_by(self) -> str:
         return self.issue.fields.reporter.name
 
     def get_developed_by(self) -> str:  # todo
-        return self.issue.fields.assignee.name
+        return ''
 
     def get_labels(self) -> list:
         return self.issue.fields.labels
 
     def get_squad_name(self) -> str:
+        if self.issue.get_field(Enums.field_squad_name) is None:
+            return ''
         return self.issue.get_field(Enums.field_squad_name).value
 
     def get_estimation(self) -> int:
@@ -62,3 +66,5 @@ class Ticket(object):
             'sprint': self.get_sprint(),
             'squad_name': self.get_squad_name(),
         }
+
+    # todo epic_link, priority, start_at, end_at, blocked_at, 

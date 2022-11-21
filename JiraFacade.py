@@ -1,4 +1,5 @@
 from typing import Optional
+import pandas as pd
 
 import jira.exceptions
 
@@ -12,7 +13,7 @@ from lib.SingletonMeta import SingletonMeta
 class JiraFacade(object, metaclass=SingletonMeta):
     def __init__(self):
         username = Config().get('jira.username')
-        token = None # Config().get('jira.token')
+        token = None  # Config().get('jira.token') todo fix this, why tokens do not work?
         if token is None:
             token = Config().get('jira.password')
         try:
@@ -32,3 +33,7 @@ class JiraFacade(object, metaclass=SingletonMeta):
         if issues:
             return list(map(lambda issue: Ticket(issue), issues))
         return None
+
+    def get_df_from_jql(self, jql: str, max_results=10):
+        tickets = self.get_tickets_from_jql(jql, max_results)
+        return pd.DataFrame(list(map(lambda ticket: ticket.get_as_dict(), tickets)))
