@@ -1,4 +1,5 @@
 from jira import Issue
+import re
 
 from Enums import Enums
 
@@ -18,9 +19,6 @@ class Ticket(object):
 
     def get_status(self) -> str:
         return self.issue.fields.status.name
-
-    def get_description(self) -> str:
-        return self.issue.fields.issuetype.description
 
     def get_type(self) -> str:
         return self.issue.fields.issuetype.name
@@ -48,7 +46,20 @@ class Ticket(object):
         return self.issue.get_field(Enums.field_estimation)
 
     def get_sprint(self) -> str:
-        return ''  # todo self.issue.get_field(Enums.field_sprint).name
+        sprint = self.issue.get_field(Enums.field_sprint)
+        if sprint is None:
+            return ''
+        sprint = sprint.pop()
+        sprint_name = re.findall('name=(.*?),', sprint)
+        if sprint_name is None:
+            return ''
+        return sprint_name.pop()
+
+    def is_out_of_plan(self) -> bool:
+        return Enums.label_out_of_plan in self.get_labels()
+
+    def get_issue(self) -> Issue:
+        return self.issue
 
     def get_as_dict(self) -> dict:
         return {
@@ -56,15 +67,14 @@ class Ticket(object):
             'link': self.get_link(),
             'summary': self.get_summary(),
             'status': self.get_status(),
-            'description': self.get_description(),
             'type': self.get_type(),
             'assigned_to': self.get_assigned_to(),
             'reported_by': self.get_reported_by(),
-            'developed_by': self.get_developed_by(),
             'labels': self.get_labels(),
             'estimate': self.get_estimation(),
             'sprint': self.get_sprint(),
             'squad_name': self.get_squad_name(),
+            'is_out_of_plan': self.is_out_of_plan(),
         }
 
-    # todo epic_link, priority, start_at, end_at, blocked_at, 
+    # todo epic_link, priority, start_at, end_at, blocked_at,

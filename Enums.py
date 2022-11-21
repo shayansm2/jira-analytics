@@ -2,7 +2,7 @@ class Enums(object):
     project_shopping = 'SHOP'
 
     field_squad_name = 'customfield_10600'
-    field_estimation = 'customfield_10528'
+    field_estimation = 'customfield_10521'
     field_sprint = 'customfield_10101'
 
     squad_name_promotion = 'Promotions'
@@ -13,6 +13,23 @@ class Enums(object):
     squad_name_b2b = 'B2B'
     squad_name_plus = 'Plus'
     squad_name_ds = 'Digistyle'
+
+    squads_shopping_core = [
+        squad_name_omc,
+        squad_name_discovery,
+        squad_name_plus,
+    ]
+
+    squads_shopping = [
+        squad_name_promotion,
+        squad_name_omc,
+        squad_name_discovery,
+        squad_name_magnet,
+        squad_name_um,
+        squad_name_b2b,
+        squad_name_plus,
+        squad_name_ds,
+    ]
 
     status_analysis = 'Analysis'
     status_product_backlog = '"Product Backlog"'
