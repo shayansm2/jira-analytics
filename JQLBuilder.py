@@ -29,10 +29,15 @@ class JQLBuilder(object):
         self.conditions.append('Sprint IN (' + ','.join(sprint_names) + ')')
         return self
 
-    def set_sprints_from_squads(self, squad_names: list, sprint: str, quarter: str, year: str = '01') -> JQLBuilder:
+    def set_sprints_from_squads(self, squad_names: list | str, sprint: str, quarter: str, year: str = '01') -> JQLBuilder:
         suffix = '-' + year + 'Q' + quarter + 'S' + sprint
-        sprint_names = [squad_name + suffix for squad_name in squad_names]
-        return self.set_sprints(sprint_names)
+
+        if type(squad_names) is list:
+            sprint_names = [squad_name + suffix for squad_name in squad_names]
+            return self.set_sprints(sprint_names)
+
+        sprint_name = squad_names + suffix
+        return self.set_sprint(sprint_name)
 
     def set_status(self, status: str) -> JQLBuilder:
         self.conditions.append('status = ' + status)
@@ -44,3 +49,5 @@ class JQLBuilder(object):
 
     def get(self) -> str:
         return ' AND '.join(self.conditions)
+
+    # todo search by developer and summary
