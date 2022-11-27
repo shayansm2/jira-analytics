@@ -29,7 +29,13 @@ class JQLBuilder(object):
         self.conditions.append('Sprint IN (' + ','.join(sprint_names) + ')')
         return self
 
-    def set_sprints_from_squads(self, squad_names: list | str, sprint: str, quarter: str, year: str = '01') -> JQLBuilder:
+    def set_sprints_from_squads(
+            self,
+            squad_names: list | str,
+            sprint: str,
+            quarter: str,
+            year: str = '01'
+    ) -> JQLBuilder:
         suffix = '-' + year + 'Q' + quarter + 'S' + sprint
 
         if type(squad_names) is list:
