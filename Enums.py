@@ -6,6 +6,7 @@ class Enums(object):
     field_squad_name = 'customfield_10600'
     field_estimation = 'customfield_10521'
     field_sprint = 'customfield_10101'
+    field_developed_by = 'customfield_10202'
 
     # squad names
     squad_name_promotion = 'Promotions'

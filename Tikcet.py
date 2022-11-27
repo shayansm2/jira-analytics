@@ -31,8 +31,10 @@ class Ticket(object):
     def get_reported_by(self) -> str:
         return self.issue.fields.reporter.name
 
-    def get_developed_by(self) -> str:  # todo
-        return ''
+    def get_developed_by(self) -> str:
+        if self.issue.get_field(Enums.field_developed_by) is None:
+            return ''
+        return self.issue.get_field(Enums.field_developed_by).name
 
     def get_labels(self) -> list:
         return self.issue.fields.labels
@@ -90,6 +92,7 @@ class Ticket(object):
             'is_out_of_plan': self.is_out_of_plan(),
             'team_name': self.get_team_name(),
             'priority': self.get_priority(),
+            'developed_by': self.get_developed_by(),
         }
 
     # todo epic_link, start_at, end_at, blocked_at,
