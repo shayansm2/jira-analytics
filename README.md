@@ -22,12 +22,11 @@ print(ticket.get_estimation())
 - create a JQL (Jira Query Language) with JQL Builder
 ```python
 from JQLBuilder import JQLBuilder
-from Enums import Enums
 
 jql = JQLBuilder()\
-    .set_project(Enums.project_shopping)\
+    .set_project('SHOP')\
     .set_sprints_from_squads(
-        squad_names=[Enums.squad_name_discovery, Enums.squad_name_omc],
+        squad_names=['Discovery', 'OMC'],
         sprint='04',
         quarter='3')\
     .get()
