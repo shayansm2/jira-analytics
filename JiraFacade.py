@@ -32,6 +32,6 @@ class JiraFacade(object, metaclass=SingletonMeta):
             return list(map(lambda issue: Ticket(issue), issues))
         return None
 
-    def get_df_from_jql(self, jql: str, max_results=10):
+    def get_df_from_jql(self, jql: str, max_results=10) -> pd.DataFrame:
         tickets = self.get_tickets_from_jql(jql, max_results)
         return pd.DataFrame(list(map(lambda ticket: ticket.get_as_dict(), tickets)))

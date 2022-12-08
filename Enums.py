@@ -1,6 +1,7 @@
 class Enums(object):
     # projects
     project_shopping = 'SHOP'
+    project_ds = 'Digistyle'
 
     # jira custom fields
     field_squad_name = 'customfield_10600'
@@ -9,30 +10,22 @@ class Enums(object):
     field_developed_by = 'customfield_10202'
 
     # squad names
-    squad_name_promotion = 'Promotions'
+    squad_name_promotion = 'Promotion'
     squad_name_omc = 'OMC'
     squad_name_discovery = 'Discovery'
     squad_name_magnet = 'Magnet'
-    squad_name_um = 'User Management'
+    squad_name_um = 'UM'
     squad_name_b2b = 'B2B'
     squad_name_plus = 'Plus'
-    squad_name_ds = 'Digistyle'
-
-    squads_shopping_core = [
-        squad_name_omc,
-        squad_name_discovery,
-        squad_name_plus,
-    ]
 
     squads_shopping = [
-        squad_name_promotion,
+        # squad_name_promotion,
         squad_name_omc,
         squad_name_discovery,
         squad_name_magnet,
         squad_name_um,
         squad_name_b2b,
         squad_name_plus,
-        squad_name_ds,
     ]
 
     # statuses
