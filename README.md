@@ -17,23 +17,39 @@ print(ticket.get_status())
 print(ticket.get_estimation())
 ```
 
-2. search tickets 
+2. search tickets
 
 - create a JQL (Jira Query Language) with JQL Builder
+
 ```python
 from JQLBuilder import JQLBuilder
 
-jql = JQLBuilder()\
-    .set_project('SHOP')\
+jql = JQLBuilder()
+    .set_project('SHOP')
     .set_sprints_from_squads(
-        squad_names=['Discovery', 'OMC'],
-        sprint='04',
-        quarter='3')\
+    squad_names=['Discovery', 'OMC'],
+    sprint='04',
+    quarter='3')
     .get()
 ```
-  - search and get the pandas dataframe
+
+- search and get the pandas dataframe
+
 ```python
 from JiraFacade import JiraFacade
 
 df = JiraFacade().get_df_from_jql(jql, max_results=100)
+```
+
+
+3. build and use custom reports
+
+```python
+from DailyVelocityReport import DailyVelocityReport
+from DetailedDailyVelocityReport import DetailedDailyVelocityReport
+from OutOfPlanReport import OutOfPlanReport
+
+DailyVelocityReport(squads='omc', sprint='04', quarter='3').get()
+DetailedDailyVelocityReport(squads='omc', sprint='04', quarter='3').get()
+OutOfPlanReport(squads='omc', sprint='04', quarter='3').get()
 ```
