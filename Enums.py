@@ -5,7 +5,7 @@ class Enums(object):
 
     # jira custom fields
     field_squad_name = 'customfield_10600'
-    field_estimation = 'customfield_10521'
+    field_development_estimation = 'customfield_10106'
     field_sprint = 'customfield_10101'
     field_developed_by = 'customfield_10202'
 
@@ -49,3 +49,4 @@ class Enums(object):
     label_front_end = 'Front-End'
     label_back_end = 'Back-End'
     label_design = 'Design'
+    label_app = 'App'

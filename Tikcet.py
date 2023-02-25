@@ -45,7 +45,7 @@ class Ticket(object):
         return self.issue.get_field(Enums.field_squad_name).value
 
     def get_estimation(self) -> int:
-        return self.issue.get_field(Enums.field_estimation)
+        return self.issue.get_field(Enums.field_development_estimation)
 
     def get_sprint(self) -> str:
         sprint = self.issue.get_field(Enums.field_sprint)
@@ -71,6 +71,8 @@ class Ticket(object):
             return 'backend'
         if Enums.label_design in labels:
             return 'design'
+        if Enums.label_app in labels:
+            return 'app'
         return ''
 
     def get_priority(self) -> str:

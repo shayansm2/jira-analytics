@@ -7,7 +7,8 @@ import pandas as pd
 class AbstractReport(object):
     developed_statuses = ['Ready To Test', 'Testing', 'Test Passed', 'Ready To Deploy', 'Deployed', 'Done']
     not_started_statuses = ['Sprint Backlog']
-    in_progress_statuses = ['In Progress', 'Code Review', 'Revision']
+    in_progress_statuses = ['In Progress', 'Revision']
+    code_review_statuses = ['Code Review']
     invalid_statuses = ['Analysis', 'Product Backlog', 'Blocked', 'Closed']
 
     def __init__(self, squad_names: str | list, sprint: str, quarter: str):

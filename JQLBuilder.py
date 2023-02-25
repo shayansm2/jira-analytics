@@ -53,6 +53,10 @@ class JQLBuilder(object):
         self.conditions.append('status IN (' + ','.join(statuses) + ')')
         return self
 
+    def set_assigned_to(self, name: str) -> JQLBuilder:
+        self.conditions.append('assignee = ' + name)
+        return self
+
     def get(self) -> str:
         return ' AND '.join(self.conditions)
 
