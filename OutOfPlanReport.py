@@ -2,13 +2,13 @@ from abc import ABC
 
 import pandas as pd
 
-from AbstractReport import AbstractReport
+from AbstractSprintReport import AbstractSprintReport
 from Enums import Enums
 from JQLBuilder import JQLBuilder
 from JiraFacade import JiraFacade
 
 
-class OutOfPlanReport(AbstractReport, ABC):
+class OutOfPlanReport(AbstractSprintReport, ABC):
     def get(self) -> pd.DataFrame:
         jql = JQLBuilder() \
             .set_project(Enums.project_shopping) \

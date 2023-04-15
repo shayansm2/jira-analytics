@@ -4,7 +4,7 @@ from typing import Optional
 import pandas as pd
 
 
-class AbstractReport(object):
+class AbstractSprintReport(object):
     developed_statuses = ['Ready To Test', 'Testing', 'Test Passed', 'Ready To Deploy', 'Deployed', 'Done']
     not_started_statuses = ['Sprint Backlog']
     in_progress_statuses = ['In Progress', 'Revision']

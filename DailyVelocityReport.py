@@ -2,13 +2,13 @@ from abc import ABC
 
 import pandas as pd
 
-from AbstractReport import AbstractReport
+from AbstractSprintReport import AbstractSprintReport
 from Enums import Enums
 from JQLBuilder import JQLBuilder
 from JiraFacade import JiraFacade
 
 
-class DailyVelocityReport(AbstractReport, ABC):
+class DailyVelocityReport(AbstractSprintReport, ABC):
     def get(self) -> pd.DataFrame:
         df = self._prepare_data()
 
