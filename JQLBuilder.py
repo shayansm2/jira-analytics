@@ -34,7 +34,7 @@ class JQLBuilder(object):
             squad_names: list | str,
             sprint: str,
             quarter: str,
-            year: str = '01'
+            year: str = '02'
     ) -> JQLBuilder:
         suffix = '-' + year + 'Q' + quarter + 'S' + sprint
 
