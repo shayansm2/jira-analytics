@@ -13,6 +13,10 @@ class JQLBuilder(object):
         self.conditions.append('key = ' + key)
         return self
 
+    def set_keys(self, keys: list) -> JQLBuilder:
+        self.conditions.append('key IN (' + ','.join(keys) + ')')
+        return self
+
     def set_squad_name(self, squad_name: str) -> JQLBuilder:
         self.conditions.append('"Shopping Area" = ' + squad_name)
         return self
@@ -55,6 +59,10 @@ class JQLBuilder(object):
 
     def set_assigned_to(self, name: str) -> JQLBuilder:
         self.conditions.append('assignee = ' + name)
+        return self
+
+    def set_type(self, type: str) -> JQLBuilder:
+        self.conditions.append('type = ' + type)
         return self
 
     def get(self) -> str:
