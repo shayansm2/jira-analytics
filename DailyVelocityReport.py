@@ -6,6 +6,7 @@ from AbstractSprintReport import AbstractSprintReport
 from Enums import Enums
 from JQLBuilder import JQLBuilder
 from JiraFacade import JiraFacade
+from report_utils import get_ticket_developer, get_ticket_state
 
 
 class DailyVelocityReport(AbstractSprintReport, ABC):
@@ -23,7 +24,10 @@ class DailyVelocityReport(AbstractSprintReport, ABC):
                                                                                        sprint=self.sprint,
                                                                                        quarter=self.quarter).get()
         df = JiraFacade().get_df_from_jql(jql, 200)
-        df['developer'] = df.apply(lambda x: self._get_developer(x['assigned_to'], x['status'], x['developed_by']),
-                                   axis=1)
-        df['state'] = df.apply(lambda x: self._get_state(x['status']), axis=1)
+
+        df['developer'] = df.apply(
+            lambda x: get_ticket_developer(x['assigned_to'], x['status'], x['developed_by']),
+            axis=1)
+
+        df['state'] = df.apply(lambda x: get_ticket_state(x['status']), axis=1)
         return df
