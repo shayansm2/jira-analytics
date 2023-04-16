@@ -36,6 +36,10 @@ class Ticket(object):
             return ''
         return self.issue.get_field(Enums.field_developed_by).name
 
+    def get_epic_ticket(self) -> str:
+        epic_ticket = self.issue.get_field(Enums.field_epic_ticket)
+        return epic_ticket if epic_ticket is not None else ''
+
     def get_labels(self) -> list:
         return self.issue.fields.labels
 
@@ -95,6 +99,7 @@ class Ticket(object):
             'team_name': self.get_team_name(),
             'priority': self.get_priority(),
             'developed_by': self.get_developed_by(),
+            'epic_ticket': self.get_epic_ticket(),
         }
 
     # todo epic_link, start_at, end_at, blocked_at,

@@ -8,6 +8,7 @@ class Enums(object):
     field_development_estimation = 'customfield_10106'
     field_sprint = 'customfield_10101'
     field_developed_by = 'customfield_10202'
+    field_epic_ticket = 'customfield_10102'
 
     # squad names
     squad_name_promotion = 'Promotion'
@@ -50,3 +51,9 @@ class Enums(object):
     label_back_end = 'Back-End'
     label_design = 'Design'
     label_app = 'App'
+
+    #types
+    type_epic = 'Epic'
+    type_bug = 'Bug'
+    type_feature = 'Feature'
+    type_improvement = 'Improvement'
