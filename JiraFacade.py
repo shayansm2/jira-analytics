@@ -21,13 +21,13 @@ class JiraFacade(object, metaclass=SingletonMeta):
             raise Exception(exception.text)
 
     def find_ticket_by_key(self, key: str) -> Optional[Ticket]:
-        issue = self.connection.issue(key)
+        issue = self.connection.issue(key, expand='changelog')
         if issue:
             return Ticket(issue)
         return None
 
     def get_tickets_from_jql(self, jql: str, max_results=10) -> Optional[list[Ticket]]:
-        issues = self.connection.search_issues(jql, maxResults=max_results)
+        issues = self.connection.search_issues(jql, maxResults=max_results, expand='changelog')
         if issues:
             return list(map(lambda issue: Ticket(issue), issues))
         return None

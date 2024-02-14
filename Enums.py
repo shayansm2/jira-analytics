@@ -9,6 +9,7 @@ class Enums(object):
     field_sprint = 'customfield_10101'
     field_developed_by = 'customfield_10202'
     field_epic_ticket = 'customfield_10102'
+    field_test_effort = 'customfield_11200'
 
     # squad names
     squad_name_promotion = 'Promotion'
@@ -31,15 +32,15 @@ class Enums(object):
 
     # statuses
     status_analysis = 'Analysis'
-    status_product_backlog = '"Product Backlog"'
-    status_sprint_backlog = '"Sprint Backlog"'
-    status_in_progress = '"In Progress"'
-    status_code_review = '"Code Review"'
-    status_ready_to_test = '"Ready To Test"'
+    status_product_backlog = 'Product Backlog'
+    status_sprint_backlog = 'Sprint Backlog'
+    status_in_progress = 'In Progress'
+    status_code_review = 'Code Review'
+    status_ready_to_test = 'Ready To Test'
     status_testing = 'Testing'
-    status_test_passed = '"Test Passed"'
+    status_test_passed = 'Test Passed'
     status_revision = 'Revision'
-    status_ready_to_deploy = '"Ready To Deploy"'
+    status_ready_to_deploy = 'Ready To Deploy'
     status_deployed = 'Deployed'
     status_done = 'Done'
     status_blocked = 'Blocked'

@@ -1,6 +1,7 @@
 from jira import Issue
 import re
 
+from History import History
 from Enums import Enums
 
 
@@ -48,8 +49,11 @@ class Ticket(object):
             return ''
         return self.issue.get_field(Enums.field_squad_name).value
 
-    def get_estimation(self) -> int:
+    def get_development_estimation(self) -> int:
         return self.issue.get_field(Enums.field_development_estimation)
+    
+    def get_test_effort(self) -> int:
+        return self.issue.get_field(Enums.field_test_effort)
 
     def get_sprint(self) -> str:
         sprint = self.issue.get_field(Enums.field_sprint)
@@ -81,6 +85,16 @@ class Ticket(object):
 
     def get_priority(self) -> str:
         return self.issue.get_field('priority').name
+    
+    def get_history(self) -> History:
+        return History(self.issue)
+    
+    def get_test_count(self) -> int:
+        result = 0
+        for change in self.get_history().get('status'):
+            if change['to'] == Enums.status_ready_to_test:
+                result += 1
+        return result 
 
     def get_as_dict(self) -> dict:
         return {
@@ -92,7 +106,8 @@ class Ticket(object):
             'assigned_to': self.get_assigned_to(),
             'reported_by': self.get_reported_by(),
             'labels': self.get_labels(),
-            'estimate': self.get_estimation(),
+            'dev_estimate': self.get_development_estimation(),
+            'test_effort': self.get_test_effort(),
             'sprint': self.get_sprint(),
             'squad_name': self.get_squad_name(),
             'is_out_of_plan': self.is_out_of_plan(),
@@ -100,6 +115,7 @@ class Ticket(object):
             'priority': self.get_priority(),
             'developed_by': self.get_developed_by(),
             'epic_ticket': self.get_epic_ticket(),
+            'test_count': self.get_test_count(),
         }
 
     # todo epic_link, start_at, end_at, blocked_at,
