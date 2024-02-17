@@ -10,6 +10,7 @@ class Enums(object):
     field_developed_by = 'customfield_10202'
     field_epic_ticket = 'customfield_10102'
     field_test_effort = 'customfield_11200'
+    field_tester  = 'customfield_10203'
 
     # squad names
     squad_name_promotion = 'Promotion'
