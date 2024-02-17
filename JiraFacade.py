@@ -1,5 +1,6 @@
 from typing import Optional
 import pandas as pd
+import duckdb
 
 import jira.exceptions
 
@@ -35,3 +36,9 @@ class JiraFacade(object, metaclass=SingletonMeta):
     def get_df_from_jql(self, jql: str, max_results=10) -> pd.DataFrame:
         tickets = self.get_tickets_from_jql(jql, max_results)
         return pd.DataFrame(list(map(lambda ticket: ticket.get_as_dict(), tickets)))
+    
+    def get_duckdb_connection_from_jql(self, jql: str, max_results=10, db_path=':memory:'):
+        df = self.get_df_from_jql(jql, max_results)
+        con = duckdb.connect(db_path)
+        con.register('jira', df)
+        return con
