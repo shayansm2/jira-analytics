@@ -1,0 +1,4 @@
+/jira/
+/__pycache__/
+**.db
+**.db.wal
