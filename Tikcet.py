@@ -6,6 +6,27 @@ from Enums import Enums
 
 
 class Ticket(object):
+    field_key = 'key'
+    field_link = 'link'
+    field_summary = 'summary'
+    field_status = 'status'
+    field_type = 'type'
+    field_assigned_to = 'assigned_to'
+    field_reported_by = 'reported_by'
+    field_labels = 'labels'
+    field_dev_estimate = 'dev_estimate'
+    field_test_effort = 'test_effort'
+    field_sprint = 'sprint'
+    field_squad_name = 'squad_name'
+    field_is_out_of_plan = 'is_out_of_plan'
+    field_team_name = 'team_name'
+    field_priority = 'priority'
+    field_developed_by = 'developed_by'
+    field_tester = 'tester'
+    field_epic_ticket = 'epic_ticket'
+    field_test_count = 'test_count'
+
+
     def __init__(self, issue: Issue):
         self.issue = issue
 
@@ -103,25 +124,25 @@ class Ticket(object):
 
     def get_as_dict(self) -> dict:
         return {
-            'key': self.get_key(),
-            'link': self.get_link(),
-            'summary': self.get_summary(),
-            'status': self.get_status(),
-            'type': self.get_type(),
-            'assigned_to': self.get_assigned_to(),
-            'reported_by': self.get_reported_by(),
-            'labels': self.get_labels(),
-            'dev_estimate': self.get_development_estimation(),
-            'test_effort': self.get_test_effort(),
-            'sprint': self.get_sprint(),
-            'squad_name': self.get_squad_name(),
-            'is_out_of_plan': self.is_out_of_plan(),
-            'team_name': self.get_team_name(),
-            'priority': self.get_priority(),
-            'developed_by': self.get_developed_by(),
-            'tester': self.get_tester(),
-            'epic_ticket': self.get_epic_ticket(),
-            'test_count': self.get_test_count(),
+            self.field_key: self.get_key(),
+            self.field_link: self.get_link(),
+            self.field_summary: self.get_summary(),
+            self.field_status: self.get_status(),
+            self.field_type: self.get_type(),
+            self.field_assigned_to: self.get_assigned_to(),
+            self.field_reported_by: self.get_reported_by(),
+            self.field_labels: self.get_labels(),
+            self.field_dev_estimate: self.get_development_estimation(),
+            self.field_test_effort: self.get_test_effort(),
+            self.field_sprint: self.get_sprint(),
+            self.field_squad_name: self.get_squad_name(),
+            self.field_is_out_of_plan: self.is_out_of_plan(),
+            self.field_team_name: self.get_team_name(),
+            self.field_priority: self.get_priority(),
+            self.field_developed_by: self.get_developed_by(),
+            self.field_tester: self.get_tester(),
+            self.field_epic_ticket: self.get_epic_ticket(),
+            self.field_test_count: self.get_test_count(),
         }
 
     # todo epic_link, start_at, end_at, blocked_at,
